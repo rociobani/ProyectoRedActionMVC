@@ -54,10 +54,13 @@ namespace WebApplication_MVC_12G.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,dni,nombreCompleto,mail,tipo,nomUsuario,pass,Seccion")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,Dni,nombreCompleto,mail")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
+                usuario.nomUsuario = usuario.Dni;
+                usuario.pass = usuario.Dni;
+                usuario.tipo = TipoUsuario.REDACTOR;
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +89,7 @@ namespace WebApplication_MVC_12G.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,dni,nombreCompleto,mail,tipo,nomUsuario,pass,Seccion")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Dni,nombreCompleto,mail,tipo,nomUsuario,pass")] Usuario usuario)
         {
             if (id != usuario.Id)
             {

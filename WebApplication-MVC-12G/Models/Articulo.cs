@@ -13,13 +13,15 @@ namespace WebApplication_MVC_12G.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public Usuario autor { get; set; }
+        [Display(Name = "Escribí tu artículo")]
         public string contenido { get; set; }
-        [Display(Name = "Fecha Publicacion")]
-        public DateTime FechaPublicacion { get; set; }
+        [Display(Name = "¿Sobre qué tema vas a hablar?")]
         [EnumDataType(typeof(Seccion))]
         public Seccion seccion { get; set; }
+        [Display(Name = "Estado del Artículo")]
         [EnumDataType(typeof(EstadoArticulo))]
         public EstadoArticulo estado { get; set; }
+        [Display(Name = "Observaciones")]
         public string observaciones { get; set; }
     }
 }

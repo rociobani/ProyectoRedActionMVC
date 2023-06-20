@@ -7,9 +7,7 @@ namespace WebApplication_MVC_12G.Models
 {
     public enum TipoUsuario
     {
-        ADIMINISTRADOR,
         JEFE_DE_REDACCION,
-        EDITOR,
         REDACTOR
     }
 }

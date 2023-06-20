@@ -12,15 +12,20 @@ namespace WebApplication_MVC_12G.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int dni { get; set; }
+        [Required]
+        public string Dni { get; set; }
+        [Required]
+        [Display(Name = "Nombre y Apellido")]
         public string nombreCompleto { get; set; }
+        [Required]
+        [Display(Name = "Email")]
         public string mail { get; set; }
+        [Display(Name = "Tipo De Usuario")]
         [EnumDataType(typeof(TipoUsuario))]
         public TipoUsuario tipo { get; set; }
+        [Display(Name = "Nombre De Usuario")]
         public string nomUsuario { get; set; }
         public string pass { get; set; }
-        [EnumDataType(typeof(Seccion))]
-        public Seccion Seccion { get; set; }
 
     }
 }
