@@ -12,12 +12,16 @@ namespace WebApplication_MVC_12G.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
+        [MinLength(7, ErrorMessage = ErrorViewModel.CaracteresMinimos)]
+        [MaxLength(8, ErrorMessage = ErrorViewModel.CaracteresMaximos)]
         public string Dni { get; set; }
-        [Required]
+        [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
+        [MinLength(3, ErrorMessage = ErrorViewModel.CaracteresMinimos)]
+        [MaxLength(50, ErrorMessage = ErrorViewModel.CaracteresMaximos)]
         [Display(Name = "Nombre y Apellido")]
         public string nombreCompleto { get; set; }
-        [Required]
+        [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
         [Display(Name = "Email")]
         public string mail { get; set; }
         [Display(Name = "Tipo De Usuario")]

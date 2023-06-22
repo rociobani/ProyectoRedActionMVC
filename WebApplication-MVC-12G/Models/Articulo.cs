@@ -13,8 +13,12 @@ namespace WebApplication_MVC_12G.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public Usuario autor { get; set; }
+        [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
+        [MinLength(50, ErrorMessage = ErrorViewModel.CaracteresMinimos)]
+        [MaxLength(1000, ErrorMessage = ErrorViewModel.CaracteresMaximos)]
         [Display(Name = "Escribí tu artículo")]
         public string contenido { get; set; }
+        [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
         [Display(Name = "¿Sobre qué tema vas a hablar?")]
         [EnumDataType(typeof(Seccion))]
         public Seccion seccion { get; set; }
