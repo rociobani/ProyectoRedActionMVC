@@ -59,7 +59,7 @@ namespace WebApplication_MVC_12G.Controllers
             if (ModelState.IsValid)
             {
                 if (await UsuarioDuplicado(usuario.Dni))
-                {
+                { 
                     return RedirectToAction("MensajeError", "Home");
                 }
 
