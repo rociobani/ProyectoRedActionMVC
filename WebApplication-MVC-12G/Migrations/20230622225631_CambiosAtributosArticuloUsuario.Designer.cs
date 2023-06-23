@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication_MVC_12G.Context;
 
 namespace WebApplication_MVC_12G.Migrations
 {
     [DbContext(typeof(EscuelaDBContext))]
-    partial class EscuelaDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230622225631_CambiosAtributosArticuloUsuario")]
+    partial class CambiosAtributosArticuloUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

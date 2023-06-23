@@ -12,7 +12,10 @@ namespace WebApplication_MVC_12G.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public Usuario autor { get; set; }
+        public int AutorId { get; set; }
+        [ForeignKey("AutorId")]
+        [Display(Name = "Autor")]
+        public Usuario? autor { get; set; }
         [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
         [MinLength(50, ErrorMessage = ErrorViewModel.CaracteresMinimos)]
         [MaxLength(1000, ErrorMessage = ErrorViewModel.CaracteresMaximos)]

@@ -22,7 +22,8 @@ namespace WebApplication_MVC_12G.Controllers
         // GET: Articulo
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Articulos.ToListAsync());
+            var escuelaDBContext = _context.Articulos.Include(a => a.autor);
+            return View(await escuelaDBContext.ToListAsync());
         }
 
         // GET: Articulo/Details/5
@@ -34,6 +35,7 @@ namespace WebApplication_MVC_12G.Controllers
             }
 
             var articulo = await _context.Articulos
+                .Include(a => a.autor)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (articulo == null)
             {
@@ -46,6 +48,7 @@ namespace WebApplication_MVC_12G.Controllers
         // GET: Articulo/Create
         public IActionResult Create()
         {
+            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "nombreCompleto");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace WebApplication_MVC_12G.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,seccion,contenido,estado,observaciones")] Articulo articulo)
+        public async Task<IActionResult> Create([Bind("Id,AutorId,contenido,seccion,estado,observaciones")] Articulo articulo)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace WebApplication_MVC_12G.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "Dni", articulo.AutorId);
             return View(articulo);
         }
 
@@ -78,6 +82,7 @@ namespace WebApplication_MVC_12G.Controllers
             {
                 return NotFound();
             }
+            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "Dni", articulo.AutorId);
             return View(articulo);
         }
 
@@ -86,7 +91,7 @@ namespace WebApplication_MVC_12G.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,seccion,contenido,estado,observaciones")] Articulo articulo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AutorId,contenido,seccion,estado,observaciones")] Articulo articulo)
         {
             if (id != articulo.Id)
             {
@@ -113,6 +118,7 @@ namespace WebApplication_MVC_12G.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "Dni", articulo.AutorId);
             return View(articulo);
         }
 
@@ -125,6 +131,7 @@ namespace WebApplication_MVC_12G.Controllers
             }
 
             var articulo = await _context.Articulos
+                .Include(a => a.autor)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (articulo == null)
             {

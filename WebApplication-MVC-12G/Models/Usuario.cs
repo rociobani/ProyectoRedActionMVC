@@ -31,5 +31,7 @@ namespace WebApplication_MVC_12G.Models
         public string nomUsuario { get; set; }
         public string pass { get; set; }
 
+        public List<Articulo>? ListaArticulos { get; set; }
+
     }
 }
