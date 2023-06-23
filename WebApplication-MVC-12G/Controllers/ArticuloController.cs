@@ -22,7 +22,7 @@ namespace WebApplication_MVC_12G.Controllers
         // GET: Articulo
         public async Task<IActionResult> Index()
         {
-            var escuelaDBContext = _context.Articulos.Include(a => a.autor);
+            var escuelaDBContext = _context.Articulos.Where(a => a.autor.tipo != TipoUsuario.JEFE_DE_REDACCION).Include(a => a.autor);
             return View(await escuelaDBContext.ToListAsync());
         }
 
@@ -48,7 +48,7 @@ namespace WebApplication_MVC_12G.Controllers
         // GET: Articulo/Create
         public IActionResult Create()
         {
-            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "nombreCompleto");
+            ViewData["AutorId"] = new SelectList(_context.Usuarios.Where(t => t.tipo != TipoUsuario.JEFE_DE_REDACCION), "Id", "nombreCompleto");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace WebApplication_MVC_12G.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "Dni", articulo.AutorId);
+            ViewData["AutorId"] = new SelectList(_context.Usuarios.Where(t => t.tipo != TipoUsuario.JEFE_DE_REDACCION), "Id", "Dni", articulo.AutorId);
             return View(articulo);
         }
 
@@ -82,7 +82,7 @@ namespace WebApplication_MVC_12G.Controllers
             {
                 return NotFound();
             }
-            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "Dni", articulo.AutorId);
+            ViewData["AutorId"] = new SelectList(_context.Usuarios.Where(t => t.tipo != TipoUsuario.JEFE_DE_REDACCION), "Id", "Dni", articulo.AutorId);
             return View(articulo);
         }
 
@@ -118,7 +118,7 @@ namespace WebApplication_MVC_12G.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutorId"] = new SelectList(_context.Usuarios, "Id", "Dni", articulo.AutorId);
+            ViewData["AutorId"] = new SelectList(_context.Usuarios.Where(t => t.tipo != TipoUsuario.JEFE_DE_REDACCION), "Id", "Dni", articulo.AutorId);
             return View(articulo);
         }
 
@@ -156,5 +156,7 @@ namespace WebApplication_MVC_12G.Controllers
         {
             return _context.Articulos.Any(e => e.Id == id);
         }
+
+        
     }
 }

@@ -7,7 +7,9 @@ namespace WebApplication_MVC_12G.Models
 {
     public enum EstadoArticulo
     {
+        BORRADOR,
         ESPERANDO_APROBACION,
+        EN_REVISION,
         PUBLICADO
     }
 }

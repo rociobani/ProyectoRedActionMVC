@@ -12,6 +12,7 @@ namespace WebApplication_MVC_12G.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Display(Name = "Autor")]
         public int AutorId { get; set; }
         [ForeignKey("AutorId")]
         [Display(Name = "Autor")]

@@ -21,8 +21,10 @@ namespace WebApplication_MVC_12G.Controllers
 
         // GET: Usuario
         public async Task<IActionResult> Index()
+
         {
-            return View(await _context.Usuarios.ToListAsync());
+            var ListaRedactores = await _context.Usuarios.Where(t => t.tipo == TipoUsuario.REDACTOR).ToListAsync();
+            return View(ListaRedactores);
         }
 
         // GET: Usuario/Details/5
@@ -159,19 +161,34 @@ namespace WebApplication_MVC_12G.Controllers
             return _context.Usuarios.Any(e => e.Id == id);
         }
 
-        private async Task<bool> UsuarioDuplicado(int dni)
+        private async Task<bool> UsuarioDuplicado(string dni)
         {
             var resultado = false;
-            var usuario = await _context.Usuario.Where(u =>u.dni == dni).FirstOrDefaultAsync(); 
+            var usuario = await _context.Usuarios.Where(u => u.Dni.Equals(dni)).FirstOrDefaultAsync(); 
             if (usuario != null)
             {
                 resultado = true;
             }
 
             return resultado;
-            }
         }
 
+        public async Task<bool> EsJefeDeRedaccion(int id)
+        {
+            var resultado = false;
+            var jdr = await _context.Usuarios.FindAsync(id);
+            if (jdr != null && jdr.tipo == TipoUsuario.JEFE_DE_REDACCION)
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
+
+    }
+
+       
+ 
 
 
 
