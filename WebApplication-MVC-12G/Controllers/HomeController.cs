@@ -23,7 +23,7 @@ namespace WebApplication_MVC_12G.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult MensajeError()
         {
             return View();
         }

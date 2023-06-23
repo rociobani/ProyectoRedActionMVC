@@ -58,6 +58,12 @@ namespace WebApplication_MVC_12G.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (await UsuarioDuplicado(usuario.Dni))
+                {
+                    return RedirectToAction("MensajeError", "Home");
+                }
+
+
                 usuario.nomUsuario = usuario.Dni;
                 usuario.pass = usuario.Dni;
                 usuario.tipo = TipoUsuario.REDACTOR;
@@ -152,5 +158,22 @@ namespace WebApplication_MVC_12G.Controllers
         {
             return _context.Usuarios.Any(e => e.Id == id);
         }
+
+        private async Task<bool> UsuarioDuplicado(int dni)
+        {
+            var resultado = false;
+            var usuario = await _context.Usuario.Where(u =>u.dni == dni).FirstOrDefaultAsync(); 
+            if (usuario != null)
+            {
+                resultado = true;
+            }
+
+            return resultado;
+            }
+        }
+
+
+
+
     }
-}
+
