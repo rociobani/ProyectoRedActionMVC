@@ -24,10 +24,10 @@ namespace WebApplication_MVC_12G.Controllers
         {
 
             var escuelaDBContext = await _context.Articulos.Include(a => a.autor).ToListAsync(); // HAGO UNA LISTA POR AUTOR
-            var listaArticulos = escuelaDBContext.where(a => a.EstadoArticulo != EstadoArticulo.ESPERANDO_APROBACION).ToList(); // FILTRO SACANDO SACANDO ESPERANDO APROBACION
-                                                                                                                                // ver que pasa si el autor es el Administrador
-                                                                                                                                //ver el index que se modifico los botones
-            return View(listaArticulos);
+            var listaArticulos = escuelaDBContext.Where(a => a.estado != EstadoArticulo.ESPERANDO_APROBACION).ToList(); // FILTRO SACANDO SACANDO ESPERANDO APROBACION
+                                                                                                                        // ver que pasa si el autor es el Administrador
+                                                                                                                        //ver el index que se modifico los botones                                                                                                                   // ver que pasa si el autor es el Administrador
+                                                                                                                        
         }
 
 
