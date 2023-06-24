@@ -27,7 +27,7 @@ namespace WebApplication_MVC_12G.Controllers
             var listaArticulos = escuelaDBContext.Where(a => a.estado != EstadoArticulo.ESPERANDO_APROBACION).ToList(); // FILTRO SACANDO SACANDO ESPERANDO APROBACION
                                                                                                                         // ver que pasa si el autor es el Administrador
                                                                                                                         //ver el index que se modifico los botones                                                                                                                   // ver que pasa si el autor es el Administrador
-                                                                                                                        
+            return View(listaArticulos);
         }
 
 
