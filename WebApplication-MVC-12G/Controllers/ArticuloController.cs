@@ -22,9 +22,14 @@ namespace WebApplication_MVC_12G.Controllers
         // GET: Articulo
         public async Task<IActionResult> Index()
         {
-            var escuelaDBContext = _context.Articulos.Where(a => a.autor.tipo != TipoUsuario.JEFE_DE_REDACCION).Include(a => a.autor);
-            return View(await escuelaDBContext.ToListAsync());
+
+            var escuelaDBContext = await _context.Articulos.Include(a => a.autor).ToListAsync(); // HAGO UNA LISTA POR AUTOR
+            var listaArticulos = escuelaDBContext.where(a => a.EstadoArticulo != EstadoArticulo.ESPERANDO_APROBACION).ToList(); // FILTRO SACANDO SACANDO ESPERANDO APROBACION
+                                                                                                                                // ver que pasa si el autor es el Administrador
+                                                                                                                                //ver el index que se modifico los botones
+            return View(listaArticulos);
         }
+
 
         // GET: Articulo/Details/5
         public async Task<IActionResult> Details(int? id)
