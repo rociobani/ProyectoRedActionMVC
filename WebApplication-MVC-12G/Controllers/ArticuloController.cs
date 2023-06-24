@@ -62,10 +62,11 @@ namespace WebApplication_MVC_12G.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AutorId,contenido,seccion,estado,observaciones")] Articulo articulo)
+        public async Task<IActionResult> Create([Bind("Id,AutorId,contenido,seccion,observaciones")] Articulo articulo)
         {
             if (ModelState.IsValid)
             {
+                articulo.estado = EstadoArticulo.BORRADOR;
                 _context.Add(articulo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
