@@ -24,8 +24,8 @@ namespace WebApplication_MVC_12G.Models
         public string contenido { get; set; }
         [Required(ErrorMessage = ErrorViewModel.CampoRequerido)]
         [Display(Name = "¿Sobre qué tema vas a hablar?")]
-        [EnumDataType(typeof(Session))]
-        public Session seccion { get; set; }
+        [EnumDataType(typeof(Seccion))]
+        public Seccion seccion { get; set; }
         [Display(Name = "Estado del Artículo")]
         [EnumDataType(typeof(EstadoArticulo))]
         public EstadoArticulo estado { get; set; }
